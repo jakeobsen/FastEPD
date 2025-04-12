@@ -476,10 +476,10 @@ uint8_t u8Value = 0; // I/O bits for the PCA9535
         ucTemp[0] = TPS_REG_ENABLE;
         ucTemp[1] = 0x3f; // enable output
         bbepI2CWrite(0x68, ucTemp, 2);
-        // set VCOM to 1.6v (1600)
+        // set VCOM to 1.4v (1400)
         ucTemp[0] = 3; // vcom voltage register 3+4 = L + H
-        ucTemp[1] = (uint8_t)(160);
-        ucTemp[2] = (uint8_t)(160 >> 8);
+        ucTemp[1] = (uint8_t)(140);
+        ucTemp[2] = (uint8_t)(140 >> 8);
 //        ucTemp[1] = (uint8_t)(160);
 //        ucTemp[2] = (uint8_t)(160 >> 8);
         bbepI2CWrite(0x68, ucTemp, 3);

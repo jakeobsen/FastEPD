@@ -14,9 +14,9 @@ double gamma_value = 0.9;
 // Image URL and jpg settings. Make sure to update WIDTH/HEIGHT if using loremflickr
 
 // DISPLAY AND IMAGE CONFIG
-#define EPD_WIDTH 1200
-#define EPD_HEIGHT 825
-#define IMG_URL "https://loremflickr.com/" STR(EPD_WIDTH) "/" STR(EPD_HEIGHT)
+#define EPD_WIDTH 2760
+#define EPD_HEIGHT 2070
+#define IMG_URL "http://192.168.1.10/16scale.jpg"
 
 // Additionally you can try CALE.es to create a custom JPG gallery
 // Using a non-ssl URL is faster since does not have to sync time
@@ -29,10 +29,10 @@ double gamma_value = 0.9;
 // verification
 //            heading ESP-TLS in
 //            https://newreleases.io/project/github/espressif/esp-idf/release/v4.3-beta1
-#define VALIDATE_SSL_CERTIFICATE true
+#define VALIDATE_SSL_CERTIFICATE false
 // To make an insecure request please check Readme
 
 // As default is 512 without setting buffer_size property in esp_http_client_config_t
 #define HTTP_RECEIVE_BUFFER_SIZE 1024
 
-#define DEBUG_VERBOSE false
+#define DEBUG_VERBOSE true
