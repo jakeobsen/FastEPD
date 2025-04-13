@@ -17,27 +17,30 @@ uint8_t ucTemp[64];
 uint8_t u8_last[16 * 48]; // to allow UNDO of a single change
 // Starting gray matrix. Copy your current one here before compiling/running the program
 uint8_t u8_graytable[] = {
-/* 0 */	  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  0,  0,  0,
-/* 1 */		0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	2,	1,	1,	1,	0,	0,	0,	0,
-/* 2 */		0,	0,	0,	0,	0,	1,	1,	1,	2,	1,	1,	1,	2,	1,	0,	0,	0,	0,
-/* 3 */		0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	2,	1,	0,	0,	0,	0,	0,
-/* 4 */	  0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	2,	1,	0,	0,	0,	0,	0,	0,
-/* 5 */		0,	0,	0,	0,	0,	1,	0,	0,	1,	2,	0,	1,	0,	0,	0,	0,	0,	0,
-/* 6 */		0,	0,	0,	0,	0,	1,  2,	0,	1,	2,	0,	1,	0,	0,	0,	0,	0,	0,
-/* 7 */ 	0,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	1,	1,	2,	0,	0,	0,
-/* 8 */ 	0,	0,	0,	0,	0,	0,	0,	1,	2,	2,	1,	2,	1,	0,	0,	0,	0,	0,
-/* 9 */ 	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	2,	0,	0,	0,
-/* 10 */	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	1,	1,	1,	1,	2,	0,	0,	0,
-/* 11 */	0,	0,	0,	0,	0,	0,	1,	1,	1,	1,	1,	1,	1,	2,	1,	2,	0,	0,
-/* 12 */	0,	0,	0,	0,	0,	1,	1,	1,	2,	1,	2,	0,	0,	0,	0,	0,	0,	0,
-/* 13 */	0,	0,	0,	0,	0,	1,	1,	2,	2,	2,	2,	1,	2,	0,	0,	0,	0,	0,
-/* 14 */	1,	1,	1,	1,	1,	1,	2,	2,	1,	2,	2,	0,	0,	0,	0,	0,	0,	0,
-/* 15 */	0,	1,	1,	1,	1,	1,	1,	2,	2,	2,	2,	2,	2,	2,	2,	2,	2,	2
+    /* 0 */ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1,
+    /* 1 */ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 2, 2, 2, 2, 1, 0, 1, 0, 0, 0, 0,
+    /* 2 */ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 2, 2, 1, 2, 2, 0, 2, 1, 0,
+    /* 3 */ 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 2, 2, 0, 2, 2, 2, 2, 1, 0, 0, 0,
+    /* 4 */ 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 0, 2, 2, 2, 1, 0, 0, 0, 0,
+    /* 5 */ 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 1, 0,
+    /* 6 */ 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 0, 2, 2, 2, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 2, 1, 0,
+    /* 7 */ 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 0, 0,
+    /* 8 */ 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 0, 0, 0, 0,
+    /* 9 */ 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 2, 0, 2, 1, 0, 0, 0, 2, 2, 0, 0, 0, 1, 1, 1, 2, 0, 0, 0, 0,
+    /* 10 */ 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 1, 0, 2, 0, 2, 1, 1, 0, 1, 0, 2, 2, 2, 0, 1, 1, 1, 0, 0, 2, 0, 0,
+    /* 11 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 0, 2, 0,
+    /* 12 */ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 1, 1, 1, 0, 2, 0,
+    /* 13 */ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 0, 0,
+    /* 14 */ 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 0, 2, 0,
+    /* 15 */ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2
 };
+
+const int screen_width = 2760;
+const int screen_height = 2070;
 
 static int passes; // Calculated at startup based on the matrix size
 // List of supported commands
-const char *szCMDs[] = {"HELP", "LIST", "SHOW", "COPY", "SWAP", "EDIT", "UNDO", 0};
+const char *szCMDs[] = {"HELP", "LIST", "SHOW", "COPY", "SWAP", "EDIT", "UNDO", "WINK", 0};
 enum {
   CMD_HELP = 0,
   CMD_LIST,
@@ -46,6 +49,7 @@ enum {
   CMD_SWAP,
   CMD_EDIT,
   CMD_UNDO,
+  CMD_WINK,
   CMD_COUNT
 };
 
@@ -150,6 +154,7 @@ void showHelp()
   Serial.println("SWAP n m - swap the contents of row n with row m");
   Serial.println("EDIT n 0 1 2 2 1 0 0... write new values for row n");
   Serial.println("UNDO - undo the last change (only 1 step is reversible)");
+  Serial.println("WINK n - blinks the display between black and white n times");
 } /* showHelp() */
 
 // List the current values of the gray matrix in a form that can be easily copied
@@ -186,18 +191,36 @@ void ShowMatrix(void)
       return;
     }
   epaper.fillScreen(0xf);
-  for (i=0; i<800; i+=50) {
-    epaper.fillRect(i, 0, 50, 250, i/50);
+  for (i=0; i<screen_width; i+=screen_width/16) {
+    epaper.fillRect(i, 50, screen_width/16, screen_height-50, i/(screen_width/16));
   }
-  epaper.drawRect(0, 0, 800, 250, 0); // draw black outline around
-  epaper.setFont(FONT_12x16);
+  epaper.setFont(FONT_16x16);
   epaper.setTextColor(BBEP_BLACK);
   for (i=0; i<16; i++) {
-    epaper.setCursor(i*50+12, 252);
-    epaper.print(i, DEC);
+    epaper.setCursor((i*(screen_width/16))+((screen_width/16)/2)-8, screen_height-(50-16));
+    epaper.setRotation(180);
+    epaper.print(15-i, DEC);
+    epaper.setRotation(0);
   }
   epaper.fullUpdate();
 } /* ShowMatrix() */
+
+
+// Display the grayscale test image on the panel to see how your current gray matrix performs
+void WinkDisplay(void)
+{
+  epaper.fillScreen(0xf);
+  delay(500);
+  epaper.fillScreen(0x0);
+  delay(500);
+  epaper.fillScreen(0xf);
+  delay(500);
+  epaper.fillScreen(0x0);
+  delay(500);
+  epaper.fillScreen(0xf);
+  delay(500);
+  epaper.fullUpdate();
+} /* WinkDisplay() */
 
 // Execute the command that the user typed
 void executeCmd(int *pData, int iCount)
@@ -213,6 +236,11 @@ uint8_t *s, *d;
       ListMatrix();
       break;
     case CMD_SHOW:
+      ShowMatrix();
+      break;
+    case CMD_WINK:
+      Serial.println("WINK - display winked");
+      WinkDisplay();
       ShowMatrix();
       break;
     case CMD_COPY:
@@ -270,11 +298,12 @@ void setup() {
   delay(3000); // wait for CDC serial to start
   passes = sizeof(u8_graytable) / 16;
   epaper.initPanel(BB_PANEL_EPDIY_V7_16);
-  rc = epaper.setPanelSize(1872, 1404, BB_PANEL_FLAG_MIRROR_X);
+  rc = epaper.setPanelSize(screen_width, screen_height);
   if (rc != BBEP_SUCCESS) {
       Serial.printf("setPanelSize returned %d\n", rc);
   }
   epaper.setMode(BB_MODE_4BPP);
+  WinkDisplay();
   ShowMatrix();
   memcpy(u8_last, u8_graytable, 16 * passes); // in case the user tries to UNDO first :)
   Serial.println("Ready! Enter a command or HELP");
