@@ -154,7 +154,7 @@ void showHelp()
   Serial.println("SWAP n m - swap the contents of row n with row m");
   Serial.println("EDIT n 0 1 2 2 1 0 0... write new values for row n");
   Serial.println("UNDO - undo the last change (only 1 step is reversible)");
-  Serial.println("WINK n - blinks the display between black and white n times");
+  Serial.println("WINK - blinks the display between black and white then shows matrix");
 } /* showHelp() */
 
 // List the current values of the gray matrix in a form that can be easily copied
